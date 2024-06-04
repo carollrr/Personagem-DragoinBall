@@ -1,0 +1,130 @@
+import java.util.List;
+
+// Classe abstrata PersonagemDragonBall
+abstract class PersonagemDragonBall {
+    protected String nome;
+    protected int idade;
+    protected char sexo;
+    protected int temporada;
+    protected double ki;
+    protected String poderEspecial;
+
+    public PersonagemDragonBall(String nome, int idade, char sexo, int temporada, double ki, String poderEspecial) {
+        this.nome = nome;
+        this.idade = idade;
+        this.sexo = sexo;
+        this.temporada = temporada;
+        this.ki = ki;
+        this.poderEspecial = poderEspecial;
+    }
+
+    public abstract double calcularPoder();
+}
+
+// Interface Transformavel
+interface Transformavel {
+    void transformar(int nivel);
+}
+
+// Classe Terraqueo
+class Terraqueo extends PersonagemDragonBall {
+    private String pais;
+    private String cidade;
+
+    public Terraqueo(String nome, int idade, char sexo, int temporada, double ki, String poderEspecial,
+                     String pais, String cidade) {
+        super(nome, idade, sexo, temporada, ki, poderEspecial);
+        this.pais = pais;
+        this.cidade = cidade;
+    }
+
+    @Override
+    public double calcularPoder() {
+        // Implemente a lógica para calcular o poder do Terraqueo
+        return 0.0;
+    }
+}
+
+// Classe Sayajin
+class Sayajin extends PersonagemDragonBall implements Transformavel {
+    private int nivelMaximoSSJ;
+    private boolean temRabo;
+
+    public Sayajin(String nome, int idade, char sexo, int temporada, double ki, String poderEspecial,
+                   int nivelMaximoSSJ, boolean temRabo) {
+        super(nome, idade, sexo, temporada, ki, poderEspecial);
+        this.nivelMaximoSSJ = nivelMaximoSSJ;
+        this.temRabo = temRabo;
+    }
+
+    @Override
+    public double calcularPoder() {
+        return ki * (1 + nivelMaximoSSJ * 0.1);
+    }
+
+    @Override
+    public void transformar(int nivel) {
+        if (nivel >= 1 && nivel <= 3) {
+            System.out.println(nome + " transformou para super sayajin nível " + nivel);
+        } else if ((nivel == 4 || nivel == 5) && (nome.equals("Goku") || nome.equals("Vegeta"))) {
+            System.out.println(nome + " transformou para super sayajin nível " + nivel);
+        } else {
+            System.out.println("Não foi possível transformar esse sayajin");
+        }
+    }
+}
+
+// Classe Namekuseijin
+class Namekuseijin extends PersonagemDragonBall {
+    private int quantidadeEsferas;
+    private boolean podeCurar;
+
+    public Namekuseijin(String nome, int idade, char sexo, int temporada, double ki, String poderEspecial,
+                        int quantidadeEsferas, boolean podeCurar) {
+        super(nome, idade, sexo, temporada, ki, poderEspecial);
+        this.quantidadeEsferas = quantidadeEsferas;
+        this.podeCurar = podeCurar;
+    }
+
+    @Override
+    public double calcularPoder() {
+        return ki * (1 + (podeCurar ? 0.2 : 0));
+    }
+
+    public String fazerDesejo(String desejo) {
+        // Implemente a lógica para transformar o pedido para o idioma Namekusei
+        // e retorne o desejo no idioma Namekusei.
+        return "Desejo realizado em Namekusei: " + desejo;
+    }
+}
+
+// Classe estática PersonagemFactory
+class PersonagemFactory {
+    public static PersonagemDragonBall criarKuririn() {
+        // Implemente a criação do personagem Kuririn
+        return null;
+    }
+
+    public static PersonagemDragonBall criarGoku() {
+        // Implemente a criação do personagem Goku
+        return null;
+    }
+
+    public static PersonagemDragonBall criarGohan() {
+        // Implemente a criação do personagem Gohan
+        return null;
+    }
+
+    public static PersonagemDragonBall criarDende() {
+        // Implemente a criação do personagem Dendê
+        return null;
+    }
+}
+
+// Exemplo de uso
+public class Main {
+    public static void main(String[] args) {
+        Sayajin goku = new Sayajin("Goku", 30, 'M', 5, 9000, "Kamehameha", 3, true);
+        goku.transformar(4); // Deve imprimir
+    }
+}
